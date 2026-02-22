@@ -12,9 +12,9 @@ export function Layout({ children }: LayoutProps) {
   // 1: CPU, 2: GPU, 3: RAM
   const menuItems = [
     { icon: Home, label: "Inicio", path: "/" },
-    { icon: Cpu, label: "Procesadores", path: "/category/1" },
+    { icon: Cpu, label: "Procesadores", path: "/category/3" },
     { icon: Server, label: "Tarjetas Gráficas", path: "/category/2" },
-    { icon: MemoryStick, label: "Memorias RAM", path: "/category/3" },
+    { icon: MemoryStick, label: "Memorias RAM", path: "/category/1" },
   ];
 
   return (

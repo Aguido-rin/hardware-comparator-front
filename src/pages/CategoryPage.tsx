@@ -7,9 +7,9 @@ import { Monitor, AlertCircle } from "lucide-react";
 import { ComparisonModal } from "../components/ComparisonModal";
 
 const CATEGORY_NAMES: Record<string, string> = {
-  "1": "Procesadores",
+  "1": "Memorias RAM",
   "2": "Tarjetas Gráficas",
-  "3": "Memorias RAM",
+  "3": "Procesadores",
   "4": "Almacenamiento",
   "5": "Placas Madre",
 };
