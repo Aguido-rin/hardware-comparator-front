@@ -1,5 +1,5 @@
 import { X, ShoppingCart, AlertCircle } from "lucide-react";
-import type { StoreListing, Product } from "../types/index.ts";
+import type { StoreListing, Product } from "../types";
 
 interface Props {
   isOpen: boolean;
@@ -15,7 +15,7 @@ export function ComparisonModal({ isOpen, onClose, product, listings, loading }:
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-warm-900/20 backdrop-blur-sm">
       <div className="bg-white rounded-3xl w-full max-w-2xl shadow-2xl shadow-warm-900/10 border border-white overflow-hidden flex flex-col max-h-[90vh]">
-        {/* Header - Ahora en tonos claros y cálidos */}
+        {/* Header */}
         <div className="p-6 border-b border-bone-100 flex justify-between items-start bg-bone-50/50">
           <div>
             <h3 className="text-xs font-bold text-warm-500 uppercase tracking-wider mb-1">Comparativa de Precios</h3>
@@ -45,55 +45,37 @@ export function ComparisonModal({ isOpen, onClose, product, listings, loading }:
               {listings.map((listing, index) => (
                 <div
                   key={listing.listingId}
-                  className={`flex items-center justify-between p-4 rounded-2xl border transition-all ${
+                  className={`flex items-center justify-between p-5 rounded-2xl border transition-all ${
                     index === 0 ? "bg-warm-50/50 border-warm-200 shadow-sm" : "bg-white border-bone-100 hover:border-bone-200"
                   }`}
                 >
-                  {/* Tienda info con Blindaje de Logo */}
-                  <div className="flex items-center gap-4">
-                    {listing.storeLogoUrl ? (
-                      <div className="w-14 h-14 bg-white border border-bone-100 rounded-xl p-2 flex items-center justify-center shadow-sm relative overflow-hidden">
-                        <img
-                          src={listing.storeLogoUrl}
-                          alt={listing.storeName}
-                          className="max-w-full max-h-full object-contain"
-                          onError={(e) => {
-                            e.currentTarget.style.display = "none";
-                            e.currentTarget.parentElement?.classList.add("bg-bone-100");
-                            e.currentTarget.parentElement!.innerHTML = `<span class="font-bold text-xs text-gray-500 uppercase">${listing.storeName.substring(0, 2)}</span>`;
-                          }}
-                        />
-                      </div>
-                    ) : (
-                      <div className="w-14 h-14 bg-bone-100 rounded-xl flex items-center justify-center font-bold text-xs text-gray-500 uppercase">
-                        {listing.storeName.substring(0, 2)}
-                      </div>
-                    )}
-
-                    {/* Resto del código de nombre y stock... */}
-                    <div>
-                      <p className="font-bold text-gray-800">{listing.storeName}</p>
-                      {/* ... */}
-                    </div>
+                  {/* Tienda info (Limpiado, sin logos ni imágenes) */}
+                  <div className="flex flex-col">
+                    <p className="font-extrabold text-gray-800 text-lg uppercase tracking-wide">{listing.storeName}</p>
+                    <p className={`text-sm font-semibold mt-1 ${listing.inStock ? "text-green-600" : "text-red-500"}`}>{listing.inStock ? "● En Stock" : "● Agotado"}</p>
                   </div>
 
-                  {/* Precio y Acción */}
-                  <div className="text-right">
-                    <p className={`text-xl md:text-2xl font-bold ${index === 0 ? "text-warm-600" : "text-gray-900"}`}>${listing.price}</p>
+                  {/* Precio y Acción en Soles */}
+                  <div className="text-right flex flex-col items-end">
+                    <p className={`text-2xl font-black tracking-tight ${index === 0 ? "text-warm-600" : "text-gray-900"}`}>
+                      {new Intl.NumberFormat("es-PE", { style: "currency", currency: "PEN" }).format(listing.price)}
+                    </p>
                     <a
                       href={listing.buyLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`mt-1 inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition ${
-                        listing.inStock ? "bg-gray-900 hover:bg-warm-600 text-white shadow-lg shadow-gray-900/10" : "bg-bone-100 text-gray-400 cursor-not-allowed"
+                      className={`mt-2 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition ${
+                        listing.inStock
+                          ? "bg-gray-900 hover:bg-warm-600 text-white shadow-lg shadow-gray-900/10 hover:shadow-warm-600/20 active:scale-95"
+                          : "bg-bone-100 text-gray-400 cursor-not-allowed pointer-events-none"
                       }`}
                     >
                       {listing.inStock ? (
                         <>
-                          Comprar <ShoppingCart size={16} />
+                          Ir a la tienda <ShoppingCart size={16} />
                         </>
                       ) : (
-                        "Sin Stock"
+                        "No Disponible"
                       )}
                     </a>
                   </div>
@@ -105,7 +87,7 @@ export function ComparisonModal({ isOpen, onClose, product, listings, loading }:
 
         {/* Footer */}
         <div className="p-4 bg-bone-50 border-t border-bone-100 text-center text-xs text-gray-400">
-          Última actualización: {listings[0]?.lastUpdate ? new Date(listings[0].lastUpdate).toLocaleString() : "Pendiente"}
+          Última actualización: {listings[0]?.lastUpdate ? new Date(listings[0].lastUpdate).toLocaleString("es-PE") : "Pendiente"}
         </div>
       </div>
     </div>

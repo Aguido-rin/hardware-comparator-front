@@ -121,7 +121,7 @@ export function SearchResults() {
                 </div>
                 <button
                   onClick={() => handleCompareClick(product)} // <--- Conectado aquí
-                  className="bg-warm-500 hover:bg-warm-600 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-lg shadow-warm-500/30 transition-transform active:scale-95"
+                  className="bg-warm-500 hover:bg-warm-600 text-black px-4 py-2 rounded-lg text-sm font-semibold shadow-lg shadow-warm-500/30 transition-transform active:scale-95"
                 >
                   Comparar
                 </button>

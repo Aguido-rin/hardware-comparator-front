@@ -16,8 +16,8 @@ export function Home() {
   return (
     <div className="flex flex-col items-center justify-center h-[80vh]">
       <div className="text-center mb-10">
-        <h2 className="text-4xl md:text-5xl font-bold text-warm-900 mb-4">Encuentra tu componente ideal</h2>
-        <p className="text-gray-500 text-lg">Comparamos precios de Amazon, Coolbox y más en tiempo real.</p>
+        <h2 className="text-4xl md:text-5xl font-bold text-warm-900 mb-4">Encuentra tu componente</h2>
+        <p className="text-gray-500 text-lg">Comparamos precios de varias tiendas tiempo real.</p>
       </div>
 
       <form onSubmit={handleSearch} className="w-full max-w-2xl relative">

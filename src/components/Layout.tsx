@@ -1,4 +1,4 @@
-import { Search, Home, Cpu, MemoryStick, Settings, Server } from "lucide-react";
+import { Home, Cpu, MemoryStick, Settings, Server, HardDrive, Monitor, Zap, CircuitBoard } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 interface LayoutProps {
@@ -8,13 +8,15 @@ interface LayoutProps {
 export function Layout({ children }: LayoutProps) {
   const location = useLocation();
 
-  // Basado en tu script SQL de Seed Data:
-  // 1: CPU, 2: GPU, 3: RAM
   const menuItems = [
     { icon: Home, label: "Inicio", path: "/" },
-    { icon: Cpu, label: "Procesadores", path: "/category/3" },
+    { icon: Cpu, label: "Procesadores", path: "/category/1" },
     { icon: Server, label: "Tarjetas Gráficas", path: "/category/2" },
-    { icon: MemoryStick, label: "Memorias RAM", path: "/category/1" },
+    { icon: MemoryStick, label: "Memorias RAM", path: "/category/3" },
+    { icon: HardDrive, label: "Almacenamiento", path: "/category/4" },
+    { icon: Monitor, label: "Monitores", path: "/category/5" },
+    { icon: Zap, label: "Fuentes de Poder", path: "/category/6" },
+    { icon: CircuitBoard, label: "Placas Madre", path: "/category/7" },
   ];
 
   return (
@@ -26,7 +28,7 @@ export function Layout({ children }: LayoutProps) {
           <p className="text-xs text-gray-400 mt-1">Comparator System v1.0</p>
         </div>
 
-        <nav className="flex-1 p-4 space-y-2">
+        <nav className="flex-1 p-4 space-y-2 overflow-y-auto custom-scrollbar">
           {menuItems.map((item) => {
             const isActive = location.pathname === item.path;
             return (
